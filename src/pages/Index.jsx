@@ -33,35 +33,6 @@ const Index = () => {
     setInputValue(event.target.value);
   };
 
-  const AvatarPicker = ({ isOpen, onClose, setAvatar }) => (
-    <Modal isOpen={isOpen} onClose={onClose}>
-      <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>Select an Avatar</ModalHeader>
-        <ModalCloseButton />
-        <ModalBody>
-          <InputGroup>
-            <InputLeftElement>
-              <Button size="sm">Upload</Button>
-            </InputLeftElement>
-            <Input placeholder="Paste image or video URL" />
-            <InputRightElement>
-              <Button
-                size="sm"
-                onClick={() => {
-                  setAvatar("example-avatar-url");
-                  onClose();
-                }}
-              >
-                Set Avatar
-              </Button>
-            </InputRightElement>
-          </InputGroup>
-        </ModalBody>
-      </ModalContent>
-    </Modal>
-  );
-
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
       handleSendMessage();
