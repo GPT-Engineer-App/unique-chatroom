@@ -49,12 +49,17 @@ const Index = () => {
               <FaInfoCircle />
             </HStack>
           </Box>
-          <Box w="48%" h="80vh" p={4} borderWidth="1px" borderRadius="lg" overflowY="scroll">
+          <Box w="48%" h="80vh" p={4} borderWidth="1px" borderRadius="lg" overflowY="scroll" position="relative">
             {messages.map((message, index) => (
               <Box key={index} alignSelf={message.sender === "user" ? "flex-end" : "flex-start"} bg={message.sender === "user" ? "blue.500" : "gray.200"} color={message.sender === "user" ? "white" : "black"} p={3} m={1} borderRadius="lg">
                 <Text>{message.text}</Text>
               </Box>
             ))}
+            <HStack spacing={4} position="absolute" bottom="1%" left="50%" transform="translateX(-50%)" w="full" justify="center">
+              <FaUser />
+              <FaMicrophone />
+              <FaInfoCircle />
+            </HStack>
           </Box>
         </HStack>
         <HStack w="full">
