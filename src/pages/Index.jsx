@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { Container, VStack, Input, Button, Box, Text, HStack, useToast } from "@chakra-ui/react";
+import { Container, VStack, Input, Button, Box, Text, HStack, useToast, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, InputGroup, InputLeftElement, InputRightElement } from "@chakra-ui/react";
 import { FaPaperPlane, FaUser, FaMicrophone, FaInfoCircle, FaCommentDots, FaHistory, FaPrint } from "react-icons/fa";
 
 const Index = () => {
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const toast = useToast();
+  const [isAvatarPickerOpen, setIsAvatarPickerOpen] = useState(false);
+  const [avatar, setAvatar] = useState(null);
 
   const handleSendMessage = () => {
     if (inputValue.trim() === "") {
@@ -31,6 +33,35 @@ const Index = () => {
     setInputValue(event.target.value);
   };
 
+  const AvatarPicker = ({ isOpen, onClose, setAvatar }) => (
+    <Modal isOpen={isOpen} onClose={onClose}>
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader>Select an Avatar</ModalHeader>
+        <ModalCloseButton />
+        <ModalBody>
+          <InputGroup>
+            <InputLeftElement>
+              <Button size="sm">Upload</Button>
+            </InputLeftElement>
+            <Input placeholder="Paste image or video URL" />
+            <InputRightElement>
+              <Button
+                size="sm"
+                onClick={() => {
+                  setAvatar("example-avatar-url");
+                  onClose();
+                }}
+              >
+                Set Avatar
+              </Button>
+            </InputRightElement>
+          </InputGroup>
+        </ModalBody>
+      </ModalContent>
+    </Modal>
+  );
+
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
       handleSendMessage();
@@ -41,12 +72,15 @@ const Index = () => {
     <Container centerContent maxW="container.md" p={4}>
       <VStack spacing={4} w="full">
         <HStack spacing={4} w="full">
-          <Box w="48%" h="80vh" p={4} borderWidth="1px" borderRadius="lg" bg="gray.200" position="relative">
+          <Box w="48%" h="80vh" p={4} borderWidth="1px" borderRadius="lg" bg="gray.200" position="relative" onClick={() => setIsAvatarPickerOpen(true)}>
             <HStack spacing={4} position="absolute" bottom="1%" left="50%" transform="translateX(-50%)" w="full" justify="center">
-              <FaUser />
+              <Box as="button" onClick={() => setIsAvatarPickerOpen(true)}>
+                <FaUser />
+              </Box>
               <FaMicrophone />
               <FaInfoCircle />
             </HStack>
+            <AvatarPicker isOpen={isAvatarPickerOpen} onClose={() => setIsAvatarPickerOpen(false)} setAvatar={setAvatar} />
           </Box>
           <Box w="48%" h="80vh" p={4} borderWidth="1px" borderRadius="lg" overflowY="scroll" position="relative">
             {messages.map((message, index) => (
