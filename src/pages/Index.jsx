@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Container, VStack, Input, Button, Box, Text, HStack, useToast } from "@chakra-ui/react";
-import { FaPaperPlane } from "react-icons/fa";
+import { FaPaperPlane, FaUser, FaMicrophone, FaInfoCircle } from "react-icons/fa";
 
 const Index = () => {
   const [messages, setMessages] = useState([]);
@@ -41,8 +41,13 @@ const Index = () => {
     <Container centerContent maxW="container.md" p={4}>
       <VStack spacing={4} w="full">
         <HStack spacing={4} w="full">
-          <Box w="48%" h="80vh" p={4} borderWidth="1px" borderRadius="lg" bg="gray.200">
+          <Box w="48%" h="80vh" p={4} borderWidth="1px" borderRadius="lg" bg="gray.200" position="relative">
             <Text>Animated Avatar Placeholder</Text>
+            <HStack spacing={4} position="absolute" bottom="1%" left="50%" transform="translateX(-50%)" w="full" justify="center">
+              <FaUser />
+              <FaMicrophone />
+              <FaInfoCircle />
+            </HStack>
           </Box>
           <Box w="48%" h="80vh" p={4} borderWidth="1px" borderRadius="lg" overflowY="scroll">
             {messages.map((message, index) => (
