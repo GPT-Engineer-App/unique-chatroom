@@ -39,24 +39,26 @@ const Index = () => {
 
   return (
     <Container centerContent maxW="container.md" p={4}>
-      <HStack spacing={4} w="full">
-        <Box w="200px" h="500px" p={4} borderWidth="1px" borderRadius="lg" bg="gray.200">
-          <Text>Animated Avatar Placeholder</Text>
-        </Box>
-        <Box w="calc(100% - 220px)" h="500px" p={4} borderWidth="1px" borderRadius="lg" overflowY="scroll">
-          {messages.map((message, index) => (
-            <Box key={index} alignSelf={message.sender === "user" ? "flex-end" : "flex-start"} bg={message.sender === "user" ? "blue.500" : "gray.200"} color={message.sender === "user" ? "white" : "black"} p={3} m={1} borderRadius="lg">
-              <Text>{message.text}</Text>
-            </Box>
-          ))}
-        </Box>
+      <VStack spacing={4} w="full">
+        <HStack spacing={4} w="full">
+          <Box w="200px" h="500px" p={4} borderWidth="1px" borderRadius="lg" bg="gray.200">
+            <Text>Animated Avatar Placeholder</Text>
+          </Box>
+          <Box w="calc(100% - 220px)" h="500px" p={4} borderWidth="1px" borderRadius="lg" overflowY="scroll">
+            {messages.map((message, index) => (
+              <Box key={index} alignSelf={message.sender === "user" ? "flex-end" : "flex-start"} bg={message.sender === "user" ? "blue.500" : "gray.200"} color={message.sender === "user" ? "white" : "black"} p={3} m={1} borderRadius="lg">
+                <Text>{message.text}</Text>
+              </Box>
+            ))}
+          </Box>
+        </HStack>
         <HStack w="full">
           <Input placeholder="Type a message..." value={inputValue} onChange={handleInputChange} onKeyPress={handleKeyPress} />
           <Button colorScheme="blue" onClick={handleSendMessage} leftIcon={<FaPaperPlane />}>
             Send
           </Button>
         </HStack>
-      </HStack>
+      </VStack>
     </Container>
   );
 };
