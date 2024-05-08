@@ -58,6 +58,14 @@ const Index = () => {
             Send
           </Button>
         </HStack>
+        <HStack justifyContent="center" spacing={4} w="full">
+          <IconButton icon={<FaUser />} aria-label="Avatar" />
+          <IconButton icon={<FaMicrophone />} aria-label="Microphone" />
+          <IconButton icon={<FaCog />} aria-label="Custom Instruction" />
+          <IconButton icon={<FaComments />} aria-label="New Chat" />
+          <IconButton icon={<FaHistory />} aria-label="History" />
+          <IconButton icon={<FaPrint />} aria-label="Printer" />
+        </HStack>
       </VStack>
     </Container>
   );
