@@ -20,7 +20,7 @@ const AvatarPicker = ({ isOpen, onClose, setAvatar }) => {
         <ModalHeader>Choose an Avatar</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <Input type="file" accept="image/jpg, image/jpeg, image/gif, image/webp, video/mp4" onChange={handleFileChange} />
+          <Input type="file" accept="image/*,video/*" onChange={handleFileChange} />
           {file && (file.type.startsWith("video") ? <Box as="video" src={file.url} autoPlay loop width="100%" /> : <Image src={file.url} alt="Avatar" width="100%" />)}
         </ModalBody>
       </ModalContent>
