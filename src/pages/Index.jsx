@@ -51,7 +51,7 @@ const Index = () => {
               <FaMicrophone />
               <FaInfoCircle />
             </HStack>
-            <AvatarPicker isOpen={isAvatarPickerOpen} onClose={() => setIsAvatarPickerOpen(false)} setAvatar={setAvatar} avatar={avatar} />
+            <AvatarPicker isOpen={isAvatarPickerOpen} onClose={() => setIsAvatarPickerOpen(false)} setAvatar={setAvatar} />
           </Box>
           <Box w="48%" h="80vh" p={4} borderWidth="1px" borderRadius="lg" overflowY="scroll" position="relative">
             {messages.map((message, index) => (
