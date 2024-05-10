@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, VStack, Input, Button, Box, Text, HStack, useToast, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, InputGroup, InputLeftElement, InputRightElement } from "@chakra-ui/react";
+import { Container, VStack, Input, Button, Box, Text, HStack, useToast, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, InputGroup, InputLeftElement, InputRightElement, Image, AspectRatio } from "@chakra-ui/react";
 import { FaPaperPlane, FaUser, FaMicrophone, FaInfoCircle, FaCommentDots, FaHistory, FaPrint } from "react-icons/fa";
 
 const Index = () => {
@@ -51,7 +51,7 @@ const Index = () => {
               <FaMicrophone />
               <FaInfoCircle />
             </HStack>
-            <AvatarPicker isOpen={isAvatarPickerOpen} onClose={() => setIsAvatarPickerOpen(false)} setAvatar={setAvatar} />
+            <AvatarPicker isOpen={isAvatarPickerOpen} onClose={() => setIsAvatarPickerOpen(false)} setAvatar={setAvatar} avatar={avatar} />
           </Box>
           <Box w="48%" h="80vh" p={4} borderWidth="1px" borderRadius="lg" overflowY="scroll" position="relative">
             {messages.map((message, index) => (
@@ -74,6 +74,37 @@ const Index = () => {
         </HStack>
       </VStack>
     </Container>
+  );
+};
+
+const AvatarPicker = ({ isOpen, onClose, setAvatar, avatar }) => {
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file && /\.(jpg|jpeg|gif|webp|mp4)$/i.test(file.name)) {
+      const url = URL.createObjectURL(file);
+      setAvatar({ url, type: file.type });
+    }
+  };
+
+  return (
+    <Modal isOpen={isOpen} onClose={onClose}>
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader>Choose an Avatar</ModalHeader>
+        <ModalCloseButton />
+        <ModalBody>
+          <input type="file" accept=".jpg,.jpeg,.gif,.webp,.mp4" onChange={handleFileChange} />
+          {avatar &&
+            (avatar.type.includes("video") ? (
+              <AspectRatio ratio={16 / 9}>
+                <video src={avatar.url} autoPlay loop />
+              </AspectRatio>
+            ) : (
+              <Image src={avatar.url} alt="Avatar" />
+            ))}
+        </ModalBody>
+      </ModalContent>
+    </Modal>
   );
 };
 
